@@ -1,0 +1,1 @@
+`import resource` fails on Linux for PyPy 1.6. bugs.pypy.org Issue 882

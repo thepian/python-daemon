@@ -20,7 +20,6 @@
 
 import os
 import sys
-import resource
 import errno
 import signal
 import socket
@@ -531,6 +530,11 @@ def prevent_core_dump():
         altogether.
 
         """
+    try:
+        import resource
+    except ImportError:
+        return
+        
     core_resource = resource.RLIMIT_CORE
 
     try:
@@ -695,6 +699,11 @@ def get_maximum_file_descriptors():
         value of ``MAXFD`` is returned.
 
         """
+    try:
+        import resource
+    except ImportError:
+        return MAXFD
+        
     limits = resource.getrlimit(resource.RLIMIT_NOFILE)
     result = limits[1]
     if result == resource.RLIM_INFINITY:
